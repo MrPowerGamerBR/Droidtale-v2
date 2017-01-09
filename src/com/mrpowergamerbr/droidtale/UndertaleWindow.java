@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import com.mrpowergamerbr.droidtale.utils.DataWrapper;
 import com.mrpowergamerbr.droidtale.utils.FileUtils;
@@ -60,9 +62,30 @@ public class UndertaleWindow {
 		frame.getContentPane().add(lblUndertaleDatawinFile);
 
 		textField = new JTextField();
-		textField.setBounds(10, 25, 86, 20);
+		textField.setBounds(10, 25, 121, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+
+		textField.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				File file = new File(textField.getText());
+				
+				DataWrapper dw = UndertaleUtils.checkData(file);
+				handleDataWrapper(dw);
+			}
+			public void removeUpdate(DocumentEvent e) {
+				File file = new File(textField.getText());
+				
+				DataWrapper dw = UndertaleUtils.checkData(file);
+				handleDataWrapper(dw);
+			}
+			public void insertUpdate(DocumentEvent e) {
+				File file = new File(textField.getText());
+				
+				DataWrapper dw = UndertaleUtils.checkData(file);
+				handleDataWrapper(dw);
+			}
+		});
 
 		JButton btnNewButton = new JButton("Select");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -70,21 +93,17 @@ public class UndertaleWindow {
 				JFileChooser fileChooser = new JFileChooser();
 				if (fileChooser.showOpenDialog(fileChooser) == JFileChooser.APPROVE_OPTION) {
 					File file = fileChooser.getSelectedFile();
-
-					DataWrapper dw = UndertaleUtils.checkData(file);
 					
-					setFileStatus(dw.fs);
-					
-					fileChecksum = dw.md5;
-					underData = dw.data;
+					textField.setText(file.getPath());
 				}
 			}
 		});
-		btnNewButton.setBounds(100, 25, 67, 20);
+		
+		btnNewButton.setBounds(141, 25, 67, 20);
 		frame.getContentPane().add(btnNewButton);
 
 		lblstatusNoFile = new JLabel("<html><b>Status:</b> <font color='red'>No file selected</font>.");
-		lblstatusNoFile.setBounds(10, 56, 157, 55);
+		lblstatusNoFile.setBounds(10, 56, 198, 55);
 		lblstatusNoFile.setVerticalAlignment(JLabel.TOP);
 		frame.getContentPane().add(lblstatusNoFile);
 
@@ -196,7 +215,7 @@ public class UndertaleWindow {
 								aapt.delete();
 								FileUtils.deleteFile(new File("assets/"));
 								new File("game.droid").delete();
-								
+
 								progressBar.setValue(100);
 
 								JOptionPane.showMessageDialog(null, "Finished building the APK!\n\nNow, copy the UndertaleWrapper.apk to your device and install it like any other APK file.", "Done!", JOptionPane.INFORMATION_MESSAGE);
@@ -217,15 +236,15 @@ public class UndertaleWindow {
 				}
 			}
 		});
-		btnBuild.setBounds(45, 122, 89, 23);
+		btnBuild.setBounds(67, 122, 89, 23);
 		frame.getContentPane().add(btnBuild);
 
 		progressBar = new JProgressBar();
-		progressBar.setBounds(10, 156, 157, 14);
+		progressBar.setBounds(10, 156, 198, 14);
 		frame.getContentPane().add(progressBar);
 
 		//Display the window.
-		frame.setSize(196, 216);
+		frame.setSize(234, 216);
 		frame.setVisible(true);
 	}
 
@@ -235,6 +254,13 @@ public class UndertaleWindow {
 		status.textPane.setCaretPosition(status.textPane.getText().length());
 	}
 
+	public void handleDataWrapper(DataWrapper dw) {
+		setFileStatus(dw.fs);
+
+		fileChecksum = dw.md5;
+		underData = dw.data;
+	}
+	
 	public void setFileStatus(FileStatus fs) {
 		this.fs = fs;
 		if (fs == FileStatus.MISSING_ASSETS) {
