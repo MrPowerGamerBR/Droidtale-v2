@@ -1,5 +1,7 @@
 package com.mrpowergamerbr.droidtale;
 
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
@@ -17,6 +19,7 @@ public class StatusWindow {
 		frmAlphysStatusWindow.setTitle("Alphys' Status Window");
 		frmAlphysStatusWindow.getContentPane().setLayout(null);
 		
+		frmAlphysStatusWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("com/mrpowergamerbr/droidtale/icon.png")));
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 364, 231);

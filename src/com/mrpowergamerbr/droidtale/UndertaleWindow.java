@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
 
@@ -57,6 +58,8 @@ public class UndertaleWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("com/mrpowergamerbr/droidtale/icon.png")));
+		
 		JLabel lblUndertaleDatawinFile = new JLabel("<html><b>data.win:</b></html>");
 		lblUndertaleDatawinFile.setBounds(10, 11, 135, 14);
 		frame.getContentPane().add(lblUndertaleDatawinFile);
