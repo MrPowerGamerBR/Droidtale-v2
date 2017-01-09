@@ -6,7 +6,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.mrpowergamerbr.droidtale.utils.DataWrapper;
+import com.mrpowergamerbr.droidtale.utils.FileUtils;
 import com.mrpowergamerbr.droidtale.utils.UndertaleUtils;
+import com.mrpowergamerbr.droidtale.utils.ZipUtils;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -192,7 +194,7 @@ public class UndertaleWindow {
 								progressBar.setValue(90);
 
 								aapt.delete();
-								new File("assets/").delete();
+								FileUtils.deleteFile(new File("assets/"));
 								new File("game.droid").delete();
 								
 								progressBar.setValue(100);

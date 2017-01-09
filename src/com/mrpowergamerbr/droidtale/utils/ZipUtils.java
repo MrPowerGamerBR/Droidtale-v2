@@ -1,4 +1,4 @@
-package com.mrpowergamerbr.droidtale;
+package com.mrpowergamerbr.droidtale.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
