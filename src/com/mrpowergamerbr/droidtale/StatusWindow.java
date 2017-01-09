@@ -15,7 +15,7 @@ public class StatusWindow {
 	 */
 	public void createAndShowGUI() {
 		// Create and set up the window.
-		JFrame frmAlphysStatusWindow = new JFrame("Droidtale Automagical Builder");
+		JFrame frmAlphysStatusWindow = new JFrame("Alphys' Status Window");
 		frmAlphysStatusWindow.setTitle("Alphys' Status Window");
 		frmAlphysStatusWindow.getContentPane().setLayout(null);
 		
