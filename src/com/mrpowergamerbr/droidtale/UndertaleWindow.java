@@ -193,7 +193,8 @@ public class UndertaleWindow {
 
 								aapt.delete();
 								new File("assets/").delete();
-
+								new File("game.droid").delete();
+								
 								progressBar.setValue(100);
 
 								JOptionPane.showMessageDialog(null, "Finished building the APK!\n\nNow, copy the UndertaleWrapper.apk to your device and install it like any other APK file.", "Done!", JOptionPane.INFORMATION_MESSAGE);
